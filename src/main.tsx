@@ -8,6 +8,7 @@ import Favoritos from './routes/Favoritos.tsx'
 import App from './App.tsx'
 import Login from './routes/Login.tsx'
 import SignIn from './routes/SignIn.tsx'
+import { UserProvider } from './context/UserContext.tsx'
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </React.StrictMode>,
 )

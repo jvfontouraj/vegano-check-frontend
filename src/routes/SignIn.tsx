@@ -6,11 +6,11 @@ import axios from 'axios'
 
 export default function SignIn() {
   const formSchema = z.object({
-    nome: z
+    name: z
       .string()
       .min(3, { message: 'Nome deve ter no mínimo 3 caracteres' }),
     email: z.string().email({ message: 'Email inválido' }),
-    senha: z
+    password: z
       .string()
       .min(6, { message: 'Senha deve ter no mínimo 6 caracteres' }),
   })
@@ -28,12 +28,16 @@ export default function SignIn() {
   const onSubmit: SubmitHandler<FormSchema> = async (data: FormSchema) => {
     try {
       await axios({
-        url: 'https://vegano-check-api-production.up.railway.app/users',
+        url: 'https://vegano-check-api-production.up.railway.app/users/',
+
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         data: {
-          nome: data.nome,
+          name: data.name,
           email: data.email,
-          senha: data.senha,
+          password: data.password,
         },
       })
     } catch (error) {
@@ -56,11 +60,11 @@ export default function SignIn() {
         </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <div>
-            <label htmlFor="nome">E-mail</label>
+            <label htmlFor="name">Nome</label>
             <input
-              {...register('nome')}
-              id="nome"
-              placeholder="John Snow"
+              {...register('name')}
+              id="name"
+              placeholder="João das Neves"
               className="w-full rounded-md border-2 border-neutral-700 px-4 py-2"
             />
           </div>
@@ -74,10 +78,10 @@ export default function SignIn() {
             />
           </div>
           <div>
-            <label htmlFor="senha">Senha</label>
+            <label htmlFor="password">Senha</label>
             <input
-              {...register('senha')}
-              id="senha"
+              {...register('password')}
+              id="password"
               placeholder="********"
               className="w-full rounded-md border-2 border-neutral-700 px-4 py-2"
             />
@@ -87,7 +91,7 @@ export default function SignIn() {
             disabled={isSubmitting}
             className="w-full rounded-md border-2 border-neutral-500 bg-neutral-700 px-4 py-2 text-neutral-50"
           >
-            Entrar
+            Submit
           </button>
         </form>
         <div className="flex gap-1 text-sm text-neutral-700">
