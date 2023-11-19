@@ -22,9 +22,7 @@ export function Header() {
         {logged ? (
           <Link to={'/favoritos/' + user.userId}>{savedSearchs} Favoritos</Link>
         ) : (
-          <span className="cursor-default text-neutral-500 line-through">
-            Favoritos
-          </span>
+          <span className="cursor-not-allowed text-neutral-500">Favoritos</span>
         )}
         {logged ? (
           <button
